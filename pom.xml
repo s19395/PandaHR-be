@@ -15,7 +15,7 @@
 	<name>pandahr-be</name>
 	<description>pandahr-be</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
