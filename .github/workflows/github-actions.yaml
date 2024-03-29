@@ -7,17 +7,26 @@ env:
 jobs:
   deploy_to_production:
     runs-on: ubuntu-latest
-    name: deploy to production with soruce code
+    name: deploy to production with artifact
     steps:
       - name: Checkout Github Action
         uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: maven build, clean
+        run: |
+          mvn clean package
 
       - name: Login via Azure CLI
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: deploy to production step with soruce code
+      - name: deploy to production with artifact
         uses: azure/spring-apps-deploy@v1
         with:
           azure-subscription: ${{ env.AZURE_SUBSCRIPTION }}
@@ -25,4 +34,4 @@ jobs:
           service-name: pandahr
           app-name: pandahr
           use-staging-deployment: false
-          package: ${{ env.ASC_PACKAGE_PATH }}
+          package: ${{ env.ASC_PACKAGE_PATH }}/**/*.jar
