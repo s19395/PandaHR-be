@@ -50,4 +50,4 @@ jobs:
           app-name: 'pandahr'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C550157EA4F74D47B842423D9E3E9C62 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AA08A0307D5A40BE800C89FF9DCA1F64 }}
