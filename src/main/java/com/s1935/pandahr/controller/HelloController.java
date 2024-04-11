@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
-import java.util.List;
+import java.security.Principal;
 
 
 @RestController
@@ -16,11 +15,11 @@ public class HelloController {
 
     @RequestMapping("/")
     public String index() {
-        return "Greetings from Azure Spring Apps! ";
+        return "Welcome to the home page!";
     }
 
     @GetMapping("/messages")
-    public ResponseEntity<List<String>> hello() {
-        return ResponseEntity.ok(Arrays.asList("Hello", "World"));
+    public ResponseEntity<String> hello(Principal principal) {
+        return ResponseEntity.ok(principal.getName() + " is accessing the messages");
     }
 }
