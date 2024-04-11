@@ -3,10 +3,18 @@ package com.s1935.pandahr.assembler;
 import com.s1935.pandahr.objects.SignUpDto;
 import com.s1935.pandahr.objects.User;
 import com.s1935.pandahr.objects.UserDto;
+import org.springframework.stereotype.Component;
 
+import static java.util.Objects.isNull;
+
+@Component
 public class UserAssembler {
 
     public UserDto toDto(User user) {
+        if (isNull(user)) {
+            return null;
+        }
+
         UserDto userDto = new UserDto();
 
         userDto.setId(user.getId());
@@ -20,6 +28,10 @@ public class UserAssembler {
     };
 
     public User fromSignUpDto(SignUpDto signUpDto) {
+        if (isNull(signUpDto)) {
+            return null;
+        }
+
         User user = new User();
 
         user.setFirstName(signUpDto.getFirstName());
