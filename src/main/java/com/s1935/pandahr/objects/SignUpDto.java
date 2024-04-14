@@ -23,5 +23,4 @@ public class SignUpDto {
 
     @NotEmpty
     private char[] password;
-
 }

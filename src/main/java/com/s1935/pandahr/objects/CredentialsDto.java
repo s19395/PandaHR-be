@@ -13,5 +13,4 @@ public class CredentialsDto {
 
     private String login;
     private char[] password;
-
 }
