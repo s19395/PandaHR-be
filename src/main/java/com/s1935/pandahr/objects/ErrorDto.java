@@ -9,5 +9,6 @@ import lombok.Data;
 @Builder
 public class ErrorDto {
 
+    //TODO iterate over this and provide more useful solution for exceptions handling
     private String message;
 }
