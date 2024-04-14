@@ -45,7 +45,11 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://orange-sand-0532bc703.5.azurestaticapps.net"));
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:3000",
+                "https://orange-sand-0532bc703.5.azurestaticapps.net",
+                "https://orange-sand-0532bc703-develop.westeurope.5.azurestaticapps.net"
+        ));
         configuration.setAllowedMethods(Arrays.asList(
                 HttpMethod.GET.name(),
                 HttpMethod.POST.name(),
