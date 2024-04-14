@@ -18,7 +18,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 @RequiredArgsConstructor
 @Configuration
@@ -30,7 +29,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(c -> c.configurationSource(corsConfigurationSource()))
+            //.cors(c -> c.configurationSource(corsConfigurationSource()))
             .exceptionHandling(customizer -> customizer.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
             .addFilterBefore(new JwtAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
             .csrf(AbstractHttpConfigurer::disable)
@@ -46,8 +45,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
-        configuration.setAllowedOriginPatterns(Collections.singletonList("*.azurestaticapps.net*"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://orange-sand-0532bc703.5.azurestaticapps.net"));
         configuration.setAllowedMethods(Arrays.asList(
                 HttpMethod.GET.name(),
                 HttpMethod.POST.name(),
