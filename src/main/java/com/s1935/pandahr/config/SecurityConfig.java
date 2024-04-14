@@ -29,7 +29,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            //.cors(c -> c.configurationSource(corsConfigurationSource()))
+            .cors(c -> c.configurationSource(corsConfigurationSource()))
             .exceptionHandling(customizer -> customizer.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
             .addFilterBefore(new JwtAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
             .csrf(AbstractHttpConfigurer::disable)
