@@ -19,17 +19,17 @@ import java.time.Duration;
 public class EmailService
 {
     @Value("${email.senderAddress}")
-    private static String SENDER_ADDRESS;
+    private static String senderAddress;
     @Value("${email.recipientAddress}")
-    private static String RECIPIENT_ADDRESS;
+    private static String recipientAddress;
     @Value("${email.connectionString}")
-    private static String CONNECTION_STRING;
+    private static String connectionString;
 
     public static final Duration POLLER_WAIT_TIME = Duration.ofSeconds(10);
 
     public void sendEmail() {
         EmailClient emailClient = new EmailClientBuilder()
-                .connectionString(CONNECTION_STRING)
+                .connectionString(connectionString)
                 .buildClient();
 
         EmailMessage message = buildMessage();
@@ -53,14 +53,14 @@ public class EmailService
             }
 
             if (poller.getFinalResult().getStatus() == EmailSendStatus.SUCCEEDED) {
-                log.info("Successfully sent the email to: {} from: {} (operation id: {})", SENDER_ADDRESS, RECIPIENT_ADDRESS, poller.getFinalResult().getId());
+                log.info("Successfully sent the email to: {} from: {} (operation id: {})", senderAddress, recipientAddress, poller.getFinalResult().getId());
             }
             else {
                 throw new RuntimeException(poller.getFinalResult().getError().getMessage());
             }
         }
-        catch (Exception exception) {
-            System.out.println(exception.getMessage());
+        catch (Exception e) {
+            log.error("An error occurred while sending the email.", e);
         }
     }
 
@@ -72,8 +72,8 @@ public class EmailService
 
     private EmailMessage buildMessage() {
         return new EmailMessage()
-                .setSenderAddress(SENDER_ADDRESS)
-                .setToRecipients(RECIPIENT_ADDRESS)
+                .setSenderAddress(senderAddress)
+                .setToRecipients(recipientAddress)
                 .setSubject("Test email from Java Sample")
                 .setBodyPlainText("This is plaintext body of test email.")
                 .setBodyHtml("<html><h1>This is the html body of test email.</h1></html>");

@@ -25,7 +25,7 @@ public class UserAssembler {
         userDto.setRole(user.getRole());
 
         return userDto;
-    };
+    }
 
     public User fromSignUpDto(SignUpDto signUpDto) {
         if (isNull(signUpDto)) {
@@ -39,5 +39,5 @@ public class UserAssembler {
         user.setLogin(signUpDto.getLogin());
 
         return user;
-    };
+    }
 }
