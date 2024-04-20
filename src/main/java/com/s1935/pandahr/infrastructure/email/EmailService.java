@@ -43,7 +43,6 @@ public class EmailService
 
             while (isPollingInProgress(pollResponse)) {
                 pollResponse = poller.poll();
-                System.out.println("Email send poller status: " + pollResponse.getStatus());
 
                 Thread.sleep(POLLER_WAIT_TIME.toMillis());
                 timeElapsed = timeElapsed.plus(POLLER_WAIT_TIME);
