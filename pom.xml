@@ -19,6 +19,8 @@
         <postgresql.version>42.7.3</postgresql.version>
         <springdoc-openapi-starter-webmvc-ui.version>2.5.0</springdoc-openapi-starter-webmvc-ui.version>
         <azure-communication-email.version>1.0.2</azure-communication-email.version>
+        <sonar.organization>pandahr</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencies>
         <dependency>
