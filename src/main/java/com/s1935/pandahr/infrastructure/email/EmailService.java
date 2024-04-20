@@ -27,15 +27,11 @@ public class EmailService
 
     public static final Duration POLLER_WAIT_TIME = Duration.ofSeconds(10);
 
-    private final EmailClient emailClient;
-
-    public EmailService() {
-        emailClient = new EmailClientBuilder()
-            .connectionString(CONNECTION_STRING)
-            .buildClient();
-    }
-
     public void sendEmail() {
+        EmailClient emailClient = new EmailClientBuilder()
+                .connectionString(CONNECTION_STRING)
+                .buildClient();
+
         EmailMessage message = buildMessage();
 
         try {
