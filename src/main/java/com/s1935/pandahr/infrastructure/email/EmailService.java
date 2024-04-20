@@ -1,0 +1,86 @@
+package com.s1935.pandahr.infrastructure.email;
+
+import com.azure.communication.email.EmailClient;
+import com.azure.communication.email.EmailClientBuilder;
+import com.azure.communication.email.models.EmailMessage;
+import com.azure.communication.email.models.EmailSendResult;
+import com.azure.communication.email.models.EmailSendStatus;
+import com.azure.core.util.polling.LongRunningOperationStatus;
+import com.azure.core.util.polling.PollResponse;
+import com.azure.core.util.polling.SyncPoller;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.time.Duration;
+
+@Slf4j
+@Service
+public class EmailService
+{
+    @Value("${email.senderAddress}")
+    private static String SENDER_ADDRESS;
+    @Value("${email.recipientAddress}")
+    private static String RECIPIENT_ADDRESS;
+    @Value("${email.connectionString}")
+    private static String CONNECTION_STRING;
+
+    public static final Duration POLLER_WAIT_TIME = Duration.ofSeconds(10);
+
+    private final EmailClient emailClient;
+
+    public EmailService() {
+        emailClient = new EmailClientBuilder()
+            .connectionString(CONNECTION_STRING)
+            .buildClient();
+    }
+
+    public void sendEmail() {
+        EmailMessage message = buildMessage();
+
+        try {
+            SyncPoller<EmailSendResult, EmailSendResult> poller = emailClient.beginSend(message, null);
+
+            PollResponse<EmailSendResult> pollResponse = null;
+
+            Duration timeElapsed = Duration.ofSeconds(0);
+
+            while (isPollingInProgress(pollResponse)) {
+                pollResponse = poller.poll();
+                System.out.println("Email send poller status: " + pollResponse.getStatus());
+
+                Thread.sleep(POLLER_WAIT_TIME.toMillis());
+                timeElapsed = timeElapsed.plus(POLLER_WAIT_TIME);
+
+                if (timeElapsed.compareTo(POLLER_WAIT_TIME.multipliedBy(18)) >= 0) {
+                    throw new RuntimeException("Polling timed out.");
+                }
+            }
+
+            if (poller.getFinalResult().getStatus() == EmailSendStatus.SUCCEEDED) {
+                log.info("Successfully sent the email to: {} from: {} (operation id: {})", SENDER_ADDRESS, RECIPIENT_ADDRESS, poller.getFinalResult().getId());
+            }
+            else {
+                throw new RuntimeException(poller.getFinalResult().getError().getMessage());
+            }
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    private boolean isPollingInProgress(PollResponse<EmailSendResult> pollResponse) {
+        return pollResponse == null
+                || pollResponse.getStatus() == LongRunningOperationStatus.NOT_STARTED
+                || pollResponse.getStatus() == LongRunningOperationStatus.IN_PROGRESS;
+    }
+
+    private EmailMessage buildMessage() {
+        return new EmailMessage()
+                .setSenderAddress(SENDER_ADDRESS)
+                .setToRecipients(RECIPIENT_ADDRESS)
+                .setSubject("Test email from Java Sample")
+                .setBodyPlainText("This is plaintext body of test email.")
+                .setBodyHtml("<html><h1>This is the html body of test email.</h1></html>");
+    }
+}
