@@ -42,8 +42,8 @@ jobs:
           DB_URL: ${{ secrets.DB_URL }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          EMAIL_CONNECTION_STRING: ${{ env.EMAIL_CONNECTION_STRING }}
-          JWT_SECRET_KEY: ${{ env.JWT_SECRET_KEY }}
+          EMAIL_CONNECTION_STRING: ${{ secrets.EMAIL_CONNECTION_STRING }}
+          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=s19395_PandaHR-be
@@ -54,8 +54,8 @@ jobs:
           DB_URL: ${{ secrets.DB_URL }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          EMAIL_CONNECTION_STRING: ${{ env.EMAIL_CONNECTION_STRING }}
-          JWT_SECRET_KEY: ${{ env.JWT_SECRET_KEY }}
+          EMAIL_CONNECTION_STRING: ${{ secrets.EMAIL_CONNECTION_STRING }}
+          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
