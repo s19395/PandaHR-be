@@ -1,6 +1,6 @@
-package com.s1935.pandahr.repository;
+package com.s1935.pandahr.backend.repository;
 
-import com.s1935.pandahr.objects.User;
+import com.s1935.pandahr.backend.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

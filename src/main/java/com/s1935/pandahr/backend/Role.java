@@ -1,4 +1,4 @@
-package com.s1935.pandahr.objects;
+package com.s1935.pandahr.backend;
 
 import org.springframework.security.core.GrantedAuthority;
 
