@@ -1,4 +1,4 @@
-package com.s1935.pandahr.infrastructure.config.config;
+package com.s1935.pandahr.infrastructure.config;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -57,5 +57,4 @@ public class UserAuthenticationProvider {
 
         return new UsernamePasswordAuthenticationToken(user, null, Arrays.asList(user.getRole()));
     }
-
 }

@@ -1,6 +1,6 @@
 package com.s1935.pandahr.controller;
 
-import com.s1935.pandahr.infrastructure.config.config.UserAuthenticationProvider;
+import com.s1935.pandahr.infrastructure.config.UserAuthenticationProvider;
 import com.s1935.pandahr.backend.CredentialsDto;
 import com.s1935.pandahr.backend.SignUpDto;
 import com.s1935.pandahr.backend.UserDto;

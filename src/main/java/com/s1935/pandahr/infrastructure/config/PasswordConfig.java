@@ -1,4 +1,4 @@
-package com.s1935.pandahr.infrastructure.config.config;
+package com.s1935.pandahr.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

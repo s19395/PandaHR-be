@@ -1,4 +1,4 @@
-package com.s1935.pandahr.infrastructure.config.config;
+package com.s1935.pandahr.infrastructure.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
