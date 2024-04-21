@@ -18,12 +18,12 @@ import java.time.Duration;
 @Service
 public class EmailService
 {
-    @Value("${email.senderAddress}")
-    private static String senderAddress;
-    @Value("${email.recipientAddress}")
-    private static String recipientAddress;
-    @Value("${email.connectionString}")
-    private static String connectionString;
+    @Value(value = "${email.senderAddress}")
+    private String senderAddress;
+    @Value(value = "${email.recipientAddress}")
+    private String recipientAddress;
+    @Value(value = "${email.connectionString}")
+    private String connectionString;
 
     public static final Duration POLLER_WAIT_TIME = Duration.ofSeconds(10);
 
@@ -53,7 +53,7 @@ public class EmailService
             }
 
             if (poller.getFinalResult().getStatus() == EmailSendStatus.SUCCEEDED) {
-                log.info("Successfully sent the email to: {} from: {} (operation id: {})", senderAddress, recipientAddress, poller.getFinalResult().getId());
+                log.info("Successfully sent the email to: {} from: {} (operation id: {})", recipientAddress, senderAddress, poller.getFinalResult().getId());
             }
             else {
                 throw new RuntimeException(poller.getFinalResult().getError().getMessage());
