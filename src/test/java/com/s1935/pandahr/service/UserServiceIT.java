@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
-public class UserServiceIT {
+class UserServiceIT {
 
     @Autowired
     private UserService userService;
@@ -47,7 +47,7 @@ public class UserServiceIT {
     }
 
     @Test
-    public void registerAndLoginWithValidCredentialsReturnsUserDto() {
+    void registerAndLoginWithValidCredentialsReturnsUserDto() {
         UserDto registeredUser = userService.register(signUpDto);
         assertNotNull(registeredUser);
 
@@ -59,7 +59,7 @@ public class UserServiceIT {
 
     @Test
     @Transactional
-    public void registerWithExistingLoginThrowsAppException() {
+    void registerWithExistingLoginThrowsAppException() {
         userService.register(signUpDto);
 
         assertThrows(AppException.class, () -> userService.register(signUpDto));
@@ -67,13 +67,13 @@ public class UserServiceIT {
 
     @Test
     @Transactional
-    public void loginWithInvalidCredentialsThrowsAppException() {
+    void loginWithInvalidCredentialsThrowsAppException() {
         assertThrows(AppException.class, () -> userService.login(credentialsDto));
     }
 
     @Test
     @Transactional
-    public void findByLoginWithExistingUserReturnsUserDto() {
+    void findByLoginWithExistingUserReturnsUserDto() {
         userService.register(signUpDto);
 
         UserDto userDto = userService.findByLogin("testUser");
@@ -83,7 +83,7 @@ public class UserServiceIT {
 
     @Test
     @Transactional
-    public void findByLoginWithNonExistingUserThrowsAppException() {
+    void findByLoginWithNonExistingUserThrowsAppException() {
         assertThrows(AppException.class, () -> userService.findByLogin("nonExistingUser"));
     }
 }
