@@ -1,4 +1,4 @@
-package com.s1935.pandahr.config;
+package com.s1935.pandahr.infrastructure.config.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

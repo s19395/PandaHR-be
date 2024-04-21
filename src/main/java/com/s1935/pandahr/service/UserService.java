@@ -1,9 +1,9 @@
 package com.s1935.pandahr.service;
 
-import com.s1935.pandahr.assembler.UserAssembler;
-import com.s1935.pandahr.exception.AppException;
-import com.s1935.pandahr.objects.*;
-import com.s1935.pandahr.repository.UserRepository;
+import com.s1935.pandahr.backend.assembler.UserAssembler;
+import com.s1935.pandahr.infrastructure.exception.AppException;
+import com.s1935.pandahr.backend.*;
+import com.s1935.pandahr.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;

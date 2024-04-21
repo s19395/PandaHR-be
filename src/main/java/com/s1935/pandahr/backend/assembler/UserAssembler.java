@@ -1,8 +1,8 @@
-package com.s1935.pandahr.assembler;
+package com.s1935.pandahr.backend.assembler;
 
-import com.s1935.pandahr.objects.SignUpDto;
-import com.s1935.pandahr.objects.User;
-import com.s1935.pandahr.objects.UserDto;
+import com.s1935.pandahr.backend.SignUpDto;
+import com.s1935.pandahr.backend.User;
+import com.s1935.pandahr.backend.UserDto;
 import org.springframework.stereotype.Component;
 
 import static java.util.Objects.isNull;

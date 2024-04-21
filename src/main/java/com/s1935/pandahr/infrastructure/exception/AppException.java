@@ -1,4 +1,4 @@
-package com.s1935.pandahr.exception;
+package com.s1935.pandahr.infrastructure.exception;
 
 import org.springframework.http.HttpStatus;
 

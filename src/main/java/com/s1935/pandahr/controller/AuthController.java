@@ -1,9 +1,9 @@
 package com.s1935.pandahr.controller;
 
-import com.s1935.pandahr.config.UserAuthenticationProvider;
-import com.s1935.pandahr.objects.CredentialsDto;
-import com.s1935.pandahr.objects.SignUpDto;
-import com.s1935.pandahr.objects.UserDto;
+import com.s1935.pandahr.infrastructure.config.config.UserAuthenticationProvider;
+import com.s1935.pandahr.backend.CredentialsDto;
+import com.s1935.pandahr.backend.SignUpDto;
+import com.s1935.pandahr.backend.UserDto;
 import com.s1935.pandahr.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

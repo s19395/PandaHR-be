@@ -1,7 +1,7 @@
-package com.s1935.pandahr.config;
+package com.s1935.pandahr.infrastructure.config.config;
 
-import com.s1935.pandahr.exception.AppException;
-import com.s1935.pandahr.objects.ErrorDto;
+import com.s1935.pandahr.infrastructure.exception.AppException;
+import com.s1935.pandahr.backend.ErrorDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
