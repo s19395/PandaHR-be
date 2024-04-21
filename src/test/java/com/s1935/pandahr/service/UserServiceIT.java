@@ -3,8 +3,10 @@ package com.s1935.pandahr.service;
 import com.s1935.pandahr.backend.CredentialsDto;
 import com.s1935.pandahr.backend.SignUpDto;
 import com.s1935.pandahr.backend.UserDto;
+import com.s1935.pandahr.backend.repository.UserRepository;
 import com.s1935.pandahr.infrastructure.exception.AppException;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +17,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
-public class UserServiceIntegrationTest {
+public class UserServiceIT {
 
     @Autowired
     private UserService userService;
 
     private SignUpDto signUpDto;
     private CredentialsDto credentialsDto;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @BeforeEach
     public void setup() {
@@ -34,6 +39,11 @@ public class UserServiceIntegrationTest {
         credentialsDto = new CredentialsDto();
         credentialsDto.setLogin("testUser");
         credentialsDto.setPassword("testPassword".toCharArray());
+    }
+
+    @AfterEach
+    public void tearDown() {
+        userRepository.deleteAll();
     }
 
     @Test
