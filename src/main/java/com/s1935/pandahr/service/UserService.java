@@ -4,6 +4,7 @@ import com.s1935.pandahr.backend.assembler.UserAssembler;
 import com.s1935.pandahr.infrastructure.exception.AppException;
 import com.s1935.pandahr.backend.*;
 import com.s1935.pandahr.backend.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +34,7 @@ public class UserService {
         throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
+    @Transactional
     public UserDto register(SignUpDto userDto) {
         Optional<User> optionalUser = userRepository.findByLogin(userDto.getLogin());
 
@@ -41,6 +43,7 @@ public class UserService {
         }
 
         User user = userAssembler.fromSignUpDto(userDto);
+
         user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
 
@@ -52,6 +55,7 @@ public class UserService {
     public UserDto findByLogin(String login) {
         User user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+
         return userAssembler.toDto(user);
     }
 }
